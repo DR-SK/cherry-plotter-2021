@@ -1,4 +1,5 @@
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS rooms;
 
 CREATE TABLE users (
     user_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -12,3 +13,14 @@ CREATE TABLE users (
     current_hp INTEGER NOT NULL,
     base_atk INTEGER
 );
+
+CREATE TABLE rooms (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    room_id TEXT NOT NULL,
+    description TEXT NOT NULL,
+    events TEXT,
+    actions TEXT,
+    items TEXT,
+    img TEXT
+);
+
