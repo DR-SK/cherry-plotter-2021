@@ -4,7 +4,8 @@ DROP TABLE IF EXISTS items CASCADE;
 DROP TABLE IF EXISTS npcs CASCADE;
 DROP TABLE IF EXISTS rooms CASCADE;
 DROP TABLE IF EXISTS game_instances CASCADE;
-DROP TABLE IF EXISTS game_user;
+DROP TABLE IF EXISTS game_users CASCADE;
+DROP TABLE IF EXISTS game_events;
 
 CREATE TABLE users (
     user_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -54,13 +55,18 @@ CREATE TABLE game_instances (
     game_completed BOOLEAN NOT NULL
 );
 
-CREATE TABLE game_user (
+CREATE TABLE game_users (
     game_id REFERENCES game_instances(game_id),
     game_user_id REFERENCES users(user_id),
     socket_uuid TEXT NOT NULL,
     current_location TEXT NOT NULL,
-    location_completed TEXT NOT NULL,
     hp INTEGER NOT NULL,
     base_atk INTEGER NOT NULL,
     inventory TEXT[]
+);
+
+CREATE TABLE game_events (
+    event_id REFERENCES events(event_id),
+    game_id REFERENCES game_instances(game_id),
+    room_id REFERENCES rooms(room_id)
 );
