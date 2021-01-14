@@ -35,5 +35,10 @@ CREATE TABLE inventories (
 CREATE TABLE items (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     room_id REFERENCES rooms.room_id,
-    interactions TEXT[]
+    interactions TEXT[],
+    actions TEXT,
+    items TEXT,
+    img TEXT
 );
+
+
