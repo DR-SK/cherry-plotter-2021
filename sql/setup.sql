@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS events CASCADE;
-DROP TABLE IF EXISTS items;
+DROP TABLE IF EXISTS items CASCADE;
+DROP TABLE IF EXISTS npcs;
 
 CREATE TABLE users (
     user_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -21,5 +22,15 @@ CREATE TABLE items (
     name TEXT NOT NULL,
     description TEXT NOT NULL,
     actions TEXT[]
+    -- room_id BIGINT REFERENCES rooms(room_id)
+);
+
+CREATE TABLE npcs (
+    npc_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL, 
+    description TEXT NOT NULL,
+    dialogue TEXT NOT NULL,
+    actions TEXT[] NOT NULL,
+    hp INTEGER NOT NULL
     -- room_id BIGINT REFERENCES rooms(room_id)
 );
