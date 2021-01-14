@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS inventories CASCADE;
 DROP TABLE IF EXISTS items;
 
 
+
 CREATE TABLE users (
     user_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     username TEXT NOT NULL,
@@ -41,6 +42,5 @@ CREATE TABLE items (
     items TEXT,
     img TEXT
 );
-
 
 
