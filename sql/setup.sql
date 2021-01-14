@@ -6,7 +6,8 @@ DROP TABLE IF EXISTS rooms CASCADE;
 DROP TABLE IF EXISTS game_instances CASCADE;
 DROP TABLE IF EXISTS game_users CASCADE;
 DROP TABLE IF EXISTS game_events CASCADE;
-DROP TABLE IF EXISTS game_items;
+DROP TABLE IF EXISTS game_items CASCADE;
+DROP TABLE IF EXISTS game_npcs;
 
 CREATE TABLE users (
     user_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -76,4 +77,12 @@ CREATE TABLE game_items (
     item_id REFERENCES items(item_id),
     game_id REFERENCES game_instances(game_id),
     room_id REFERENCES rooms(room_id)
+);
+
+CREATE TABLE game_npcs (
+    npc_id REFERENCES npcs(npc_id),
+    game_id REFERENCES game_instances(game_id),
+    room_id REFERENCES rooms(room_id),
+    dialogue_exhausted BOOLEAN NOT NULL,
+    alive_or_dead BOOLEAN NOT NULL
 );
