@@ -1,5 +1,7 @@
 DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS rooms;
+DROP TABLE IF EXISTS rooms CASCADE;
+DROP TABLE IF EXISTS inventories CASCADE;
+DROP TABLE IF EXISTS items;
 
 CREATE TABLE users (
     user_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -19,8 +21,24 @@ CREATE TABLE rooms (
     room_id TEXT NOT NULL,
     description TEXT NOT NULL,
     events TEXT,
+    actions TEXT[],
+    items TEXT[],
+    img TEXT
+);
+
+CREATE TABLE inventories (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    user_id REFERENCES user.user_id,
+    inventory TEXT[]
+);
+
+CREATE TABLE items (
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    room_id REFERENCES rooms.room_id,
+    interactions TEXT[],
     actions TEXT,
     items TEXT,
     img TEXT
 );
+
 
