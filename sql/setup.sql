@@ -1,7 +1,8 @@
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS events CASCADE;
 DROP TABLE IF EXISTS items CASCADE;
-DROP TABLE IF EXISTS npcs;
+DROP TABLE IF EXISTS npcs CASCADE;
+DROP TABLE IF EXISTS rooms;
 
 CREATE TABLE users (
     user_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -14,7 +15,7 @@ CREATE TABLE events (
     event_name TEXT NOT NULL,
     description TEXT NOT NULL
     -- side_effects (STRETCH)
-    -- room_id BIGINT REFERENCES rooms(room_id)
+    room_id BIGINT REFERENCES rooms(room_id)
 );
 
 CREATE TABLE items (
@@ -22,7 +23,7 @@ CREATE TABLE items (
     name TEXT NOT NULL,
     description TEXT NOT NULL,
     actions TEXT[]
-    -- room_id BIGINT REFERENCES rooms(room_id)
+    room_id BIGINT REFERENCES rooms(room_id)
 );
 
 CREATE TABLE npcs (
@@ -32,5 +33,16 @@ CREATE TABLE npcs (
     dialogue TEXT NOT NULL,
     actions TEXT[] NOT NULL,
     hp INTEGER NOT NULL
-    -- room_id BIGINT REFERENCES rooms(room_id)
+    room_id BIGINT REFERENCES rooms(room_id)
+);
+
+CREATE TABLE rooms (
+    room_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL, 
+    description TEXT NOT NULL,
+    img TEXT,
+    north TEXT NOT NULL, 
+    east TEXT NOT NULL,
+    south TEXT NOT NULL,
+    west TEXT NOT NULL
 );
