@@ -3,7 +3,8 @@ DROP TABLE IF EXISTS events CASCADE;
 DROP TABLE IF EXISTS items CASCADE;
 DROP TABLE IF EXISTS npcs CASCADE;
 DROP TABLE IF EXISTS rooms CASCADE;
-DROP TABLE IF EXISTS game_instances;
+DROP TABLE IF EXISTS game_instances CASCADE;
+DROP TABLE IF EXISTS game_user;
 
 CREATE TABLE users (
     user_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -16,7 +17,7 @@ CREATE TABLE events (
     event_name TEXT NOT NULL,
     description TEXT NOT NULL
     -- side_effects (STRETCH)
-    room_id BIGINT REFERENCES rooms(room_id)
+    room_id REFERENCES rooms(room_id)
 );
 
 CREATE TABLE items (
@@ -24,7 +25,7 @@ CREATE TABLE items (
     name TEXT NOT NULL,
     description TEXT NOT NULL,
     actions TEXT[]
-    room_id BIGINT REFERENCES rooms(room_id)
+    room_id REFERENCES rooms(room_id)
 );
 
 CREATE TABLE npcs (
@@ -34,7 +35,7 @@ CREATE TABLE npcs (
     dialogue TEXT NOT NULL,
     actions TEXT[] NOT NULL,
     hp INTEGER NOT NULL
-    room_id BIGINT REFERENCES rooms(room_id)
+    room_id REFERENCES rooms(room_id)
 );
 
 CREATE TABLE rooms (
@@ -51,4 +52,15 @@ CREATE TABLE rooms (
 CREATE TABLE game_instances (
     game_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     game_completed BOOLEAN NOT NULL
+);
+
+CREATE TABLE game_user (
+    game_id REFERENCES game_instances(game_id),
+    game_user_id REFERENCES users(user_id),
+    socket_uuid TEXT NOT NULL,
+    current_location TEXT NOT NULL,
+    location_completed TEXT NOT NULL,
+    hp INTEGER NOT NULL,
+    base_atk INTEGER NOT NULL,
+    inventory TEXT[]
 );
