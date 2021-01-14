@@ -15,32 +15,6 @@ CREATE TABLE users (
     password_hash TEXT NOT NULL
 );
 
-CREATE TABLE events (
-    event_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    event_name TEXT NOT NULL,
-    description TEXT NOT NULL
-    -- side_effects (STRETCH)
-    room_id REFERENCES rooms(room_id)
-);
-
-CREATE TABLE items (
-    item_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name TEXT NOT NULL,
-    description TEXT NOT NULL,
-    actions TEXT[]
-    room_id REFERENCES rooms(room_id)
-);
-
-CREATE TABLE npcs (
-    npc_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    name TEXT NOT NULL, 
-    description TEXT NOT NULL,
-    dialogue TEXT NOT NULL,
-    actions TEXT[] NOT NULL,
-    hp INTEGER NOT NULL
-    room_id REFERENCES rooms(room_id)
-);
-
 CREATE TABLE rooms (
     room_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name TEXT NOT NULL, 
@@ -52,14 +26,39 @@ CREATE TABLE rooms (
     west TEXT NOT NULL
 );
 
+CREATE TABLE events (
+    event_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    event_name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    room_id BIGINT REFERENCES rooms(room_id)
+);
+
+CREATE TABLE items (
+    item_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    actions TEXT[],
+    room_id REFERENCES rooms(room_id)
+);
+
+CREATE TABLE npcs (
+    npc_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL, 
+    description TEXT NOT NULL,
+    dialogue TEXT NOT NULL,
+    actions TEXT[] NOT NULL,
+    hp INTEGER NOT NULL,
+    room_id BIGINT REFERENCES rooms(room_id)
+);
+
 CREATE TABLE game_instances (
     game_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     game_completed BOOLEAN NOT NULL
 );
 
 CREATE TABLE game_users (
-    game_id REFERENCES game_instances(game_id),
-    game_user_id REFERENCES users(user_id),
+    game_id BIGINT REFERENCES game_instances(game_id),
+    game_user_id BIGINT REFERENCES users(user_id),
     socket_uuid TEXT NOT NULL,
     current_location TEXT NOT NULL,
     hp INTEGER NOT NULL,
@@ -68,21 +67,21 @@ CREATE TABLE game_users (
 );
 
 CREATE TABLE game_events (
-    event_id REFERENCES events(event_id),
-    game_id REFERENCES game_instances(game_id),
-    room_id REFERENCES rooms(room_id)
+    event_id BIGINT REFERENCES events(event_id),
+    game_id BIGINT REFERENCES game_instances(game_id),
+    room_id BIGINT REFERENCES rooms(room_id)
 );
 
 CREATE TABLE game_items (
-    item_id REFERENCES items(item_id),
-    game_id REFERENCES game_instances(game_id),
-    room_id REFERENCES rooms(room_id)
+    item_id BIGINT REFERENCES items(item_id),
+    game_id BIGINT REFERENCES game_instances(game_id),
+    room_id BIGINT REFERENCES rooms(room_id)
 );
 
 CREATE TABLE game_npcs (
-    npc_id REFERENCES npcs(npc_id),
-    game_id REFERENCES game_instances(game_id),
-    room_id REFERENCES rooms(room_id),
+    npc_id BIGINT REFERENCES npcs(npc_id),
+    game_id BIGINT REFERENCES game_instances(game_id),
+    room_id BIGINT REFERENCES rooms(room_id),
     dialogue_exhausted BOOLEAN NOT NULL,
     alive_or_dead BOOLEAN NOT NULL
 );
