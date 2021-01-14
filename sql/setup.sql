@@ -1,46 +1,88 @@
 DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS events CASCADE;
+DROP TABLE IF EXISTS items CASCADE;
+DROP TABLE IF EXISTS npcs CASCADE;
 DROP TABLE IF EXISTS rooms CASCADE;
-DROP TABLE IF EXISTS inventories CASCADE;
-DROP TABLE IF EXISTS items;
-
-
+DROP TABLE IF EXISTS game_instances CASCADE;
+DROP TABLE IF EXISTS game_users CASCADE;
+DROP TABLE IF EXISTS game_events CASCADE;
+DROP TABLE IF EXISTS game_items CASCADE;
+DROP TABLE IF EXISTS game_npcs;
 
 CREATE TABLE users (
     user_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     username TEXT NOT NULL,
-    password_hash TEXT NOT NULL,
-    socket_id TEXT NOT NULL,
-    current_location TEXT NOT NULL,
-    location_completed BOOLEAN,
-    inventory TEXT[],
-    events TEXT[],
-    current_hp INTEGER NOT NULL,
-    base_atk INTEGER
+    password_hash TEXT NOT NULL
 );
 
-CREATE TABLE rooms (
-    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    room_id TEXT NOT NULL,
-    description TEXT NOT NULL,
-    events TEXT,
-    actions TEXT[],
-    items TEXT[],
-    img TEXT
-);
-
-CREATE TABLE inventories (
-    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    user_id REFERENCES user.user_id,
-    inventory TEXT[]
+CREATE TABLE events (
+    event_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    event_name TEXT NOT NULL,
+    description TEXT NOT NULL
+    -- side_effects (STRETCH)
+    room_id REFERENCES rooms(room_id)
 );
 
 CREATE TABLE items (
-    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    room_id REFERENCES rooms.room_id,
-    interactions TEXT[],
-    actions TEXT,
-    items TEXT,
-    img TEXT
+    item_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    actions TEXT[]
+    room_id REFERENCES rooms(room_id)
 );
 
+CREATE TABLE npcs (
+    npc_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL, 
+    description TEXT NOT NULL,
+    dialogue TEXT NOT NULL,
+    actions TEXT[] NOT NULL,
+    hp INTEGER NOT NULL
+    room_id REFERENCES rooms(room_id)
+);
 
+CREATE TABLE rooms (
+    room_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name TEXT NOT NULL, 
+    description TEXT NOT NULL,
+    img TEXT,
+    north TEXT NOT NULL, 
+    east TEXT NOT NULL,
+    south TEXT NOT NULL,
+    west TEXT NOT NULL
+);
+
+CREATE TABLE game_instances (
+    game_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    game_completed BOOLEAN NOT NULL
+);
+
+CREATE TABLE game_users (
+    game_id REFERENCES game_instances(game_id),
+    game_user_id REFERENCES users(user_id),
+    socket_uuid TEXT NOT NULL,
+    current_location TEXT NOT NULL,
+    hp INTEGER NOT NULL,
+    base_atk INTEGER NOT NULL,
+    inventory TEXT[]
+);
+
+CREATE TABLE game_events (
+    event_id REFERENCES events(event_id),
+    game_id REFERENCES game_instances(game_id),
+    room_id REFERENCES rooms(room_id)
+);
+
+CREATE TABLE game_items (
+    item_id REFERENCES items(item_id),
+    game_id REFERENCES game_instances(game_id),
+    room_id REFERENCES rooms(room_id)
+);
+
+CREATE TABLE game_npcs (
+    npc_id REFERENCES npcs(npc_id),
+    game_id REFERENCES game_instances(game_id),
+    room_id REFERENCES rooms(room_id),
+    dialogue_exhausted BOOLEAN NOT NULL,
+    alive_or_dead BOOLEAN NOT NULL
+);
