@@ -13,7 +13,7 @@ describe('test auth routes', () => {
   });
   it('allow the user to sign up for the game via POST', async() => {
     return request(app)
-      .post('/api/v1/auth/signup')
+      .post('/api/vi/auth/signup')
       .send({ username: 'test1', password: 'test1' })
       .then(res => {
         expect(res.text).toEqual({
