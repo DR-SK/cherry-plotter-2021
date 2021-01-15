@@ -12,14 +12,15 @@ describe('test auth routes', () => {
     return pool.query.end();
   });
   it('allow the user to sign up for the game via POST', async() => {
+  
     return request(app)
       .post('/api/v1/auth/signup')
       .send({ username: 'test1', password: 'test1' })
-      .then(res => {
-        expect(res.text).toEqual({
+      .then(res => {  
+        expect(res.body).toEqual({
           userId: expect.any(String),
           username: 'test1',
-          password: 'test1'
+          passwordHash: expect.any(String)
         });
       });
 
