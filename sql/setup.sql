@@ -38,7 +38,7 @@ CREATE TABLE users (
 --     name TEXT NOT NULL,
 --     description TEXT NOT NULL,
 --     actions TEXT[],
---     room_id REFERENCES rooms(room_id)
+--     room_id BIGINT REFERENCES rooms(room_id)
 -- );
 
 -- CREATE TABLE npcs (
