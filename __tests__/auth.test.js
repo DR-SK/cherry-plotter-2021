@@ -50,38 +50,38 @@ describe('test auth routes', () => {
 
   // ------------------------------------------------
 
-  // it('verify user via /auth', async() => {
-  //   const agent = request.agent(app);
-  //   const user = await UserService.create({
-  //     username: 'user@test.com',
-  //     password: 'password'
-  //   });
-    
-  //   await agent
-  //     .post('/api/v1/auth/login')
-  //     .send({ username: 'user@test.com',
-  //       password: 'password'
-  //     });
-    
-  //   const res = await agent
-  //     .get('/api/v1/auth/verify');
-  //   console.log(res.body)
-  //   expect(res.body).toEqual({
-  //     id: user.id,
-  //     username: 'user@test.com'
-  //   });
-  // });
-
-
   it('verify user via /auth', async() => {
     const agent = request.agent(app);
-    const respond = await agent
+    const user = await UserService.create({
+      username: 'user@test.com',
+      password: 'password'
+    });
+    
+    await agent
+      .post('/api/v1/auth/login')
+      .send({ username: 'user@test.com',
+        password: 'password'
+      });
+    
+    const res = await agent
       .get('/api/v1/auth/verify');
-
-    expect(respond.body).toEqual({
-      id: expect.any(String),
-      email: 'user@test.com'
+ 
+    expect(res.body).toEqual({
+      userId: user.userId,
+      username: 'user@test.com'
     });
   });
+
+
+  // it('verify user via /auth', async() => {
+  //   const agent = request.agent(app);
+  //   const respond = await agent
+  //     .get('/api/v1/auth/verify');
+
+  //   expect(respond.body).toEqual({
+  //     id: expect.any(String),
+  //     email: 'user@test.com'
+  //   });
+  // });
 
 });
