@@ -72,16 +72,4 @@ describe('test auth routes', () => {
     });
   });
 
-
-  // it('verify user via /auth', async() => {
-  //   const agent = request.agent(app);
-  //   const respond = await agent
-  //     .get('/api/v1/auth/verify');
-
-  //   expect(respond.body).toEqual({
-  //     id: expect.any(String),
-  //     email: 'user@test.com'
-  //   });
-  // });
-
 });
