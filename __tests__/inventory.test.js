@@ -36,4 +36,8 @@ describe("test inventory routes", () => {
 
     expect(res.body).toEqual({ inventory: ["key"] });
   });
+
+  it("allows a user to remove an item from their inventory", async () => {
+    expect(res.body).toEqual({ inventory: [] });
+  });
 });
