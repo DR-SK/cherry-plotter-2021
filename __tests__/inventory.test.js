@@ -22,4 +22,8 @@ describe("test inventory routes", () => {
 
     expect(res.body).toEqual({ inventory: ["key"] });
   });
+
+  it("allows a user to view their inventory via GET", async () => {
+    expect(res.body).toEqual({ inventory: ["key"] });
+  });
 });
