@@ -24,6 +24,16 @@ describe("test inventory routes", () => {
   });
 
   it("allows a user to view their inventory via GET", async () => {
+    const { rows } = await pool.query(`SELECT * FROM game_users`);
+
+    await request(app).get(
+      `/inventory/add/${rows[0].game_id}/${rows[0].game_user_id}/key`
+    );
+
+    const res = await request(app).get(
+      `/inventory/view/${rows[0].game_id}/${rows[0].game_user_id}`
+    );
+
     expect(res.body).toEqual({ inventory: ["key"] });
   });
 });
