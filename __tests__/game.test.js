@@ -20,4 +20,18 @@ describe("test inventory routes", () => {
 
     expect(res.body).toEqual({ game_id: "1" });
   });
+
+  it("allows a user to join an existing game", async () => {
+    const { rows: user } = await pool.query(`SELECT * FROM users`);
+
+    await request(app).get(`/games/new/${user[0].user_id}`);
+
+    const { rows: game } = await pool.query(`SELECT * FROM game_users`);
+
+    const res = await request(app).get(
+      `/games/join/${game[0].game_id}/${game[0].game_user_id}`
+    );
+
+    expect(res.body).toEqual({ game_id: "1" });
+  });
 });
