@@ -83,5 +83,5 @@ CREATE TABLE game_npcs (
     game_id BIGINT REFERENCES game_instances(game_id),
     room_id BIGINT REFERENCES rooms(room_id),
     dialogue_exhausted BOOLEAN NOT NULL,
-    alive_or_dead BOOLEAN NOT NULL
+    alive BOOLEAN NOT NULL
 );
