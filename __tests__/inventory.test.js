@@ -4,8 +4,9 @@ const request = require("supertest");
 const app = require("../lib/app");
 
 describe("test inventory routes", () => {
-  beforeEach(() => {
-    return pool.query(fs.readFileSync("./sql/setup.sql", "utf-8"));
+  beforeEach(async () => {
+    await pool.query(fs.readFileSync("./sql/setup.sql", "utf-8"));
+    await pool.query(fs.readFileSync("./sql/inventory.test.sql", "utf-8"));
   });
 
   afterAll(() => {
