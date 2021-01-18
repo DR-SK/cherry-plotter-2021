@@ -12,4 +12,8 @@ describe("test inventory routes", () => {
   afterAll(() => {
     return pool.query.end();
   });
+
+  it("allows a user to add an item to their inventory", async () => {
+    expect(res.body).toEqual({ inventory: ["key"] });
+  });
 });
