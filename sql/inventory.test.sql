@@ -17,13 +17,6 @@ VALUES  ('key', 'a key', '{hold, use}', 1);
 COMMIT;
 
 BEGIN;
--- ensure that the item belongs to to the correct room by room_id
-UPDATE items
-SET (room_id) = (SELECT room_id FROM rooms
-WHERE rooms.name = 'entrance-hall');
-COMMIT;
-
-BEGIN;
 -- create a new game instance
 INSERT INTO game_instances (game_completed)
 VALUES (false);
