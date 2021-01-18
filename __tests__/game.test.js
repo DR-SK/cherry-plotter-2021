@@ -12,4 +12,12 @@ describe("test inventory routes", () => {
   afterAll(() => {
     return pool.query.end();
   });
+
+  it("allows a user to create a new game", async () => {
+    const { rows } = await pool.query(`SELECT * FROM users`);
+
+    const res = await request(app).get(`/games/new/${rows[0].user_id}`);
+
+    expect(res.body).toEqual({ game_id: "1" });
+  });
 });
