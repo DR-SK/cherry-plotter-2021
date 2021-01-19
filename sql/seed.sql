@@ -1,12 +1,12 @@
 BEGIN;
-INSERT INTO users (username, password_hash)
-VALUES  ('dee', 'password');
-COMMIT;
-
-BEGIN;
 INSERT INTO rooms (name, description, north, east, south, west)
 VALUES  ('entrance-hall', 'the entrance hall', 'room-1', 'null', 'null', 'null'),
         ('room-1', 'the first room', 'null', 'null', 'entrance-hall', 'null' );
+COMMIT;
+
+BEGIN;
+INSERT INTO events (event_name, description, room_id)
+VALUES ('null' , 'you broke a chair', 2);
 COMMIT;
 
 BEGIN;
@@ -17,28 +17,8 @@ VALUES  ('first-aid', 'You notice a first-aid package sitting on one of the tabl
 COMMIT;
 
 BEGIN;
-INSERT INTO game_instances (game_completed)
-VALUES (false);
-COMMIT;
-
-BEGIN;
-INSERT INTO game_users (game_id, game_user_id, socket_uuid, current_location, hp, base_atk, inventory)
-VALUES  (1, 1, 1, 'entrance-hall', 20, 1, '{}'),
-        (1, 1, 2, 'entrance-hall', 20, 1, '{}'),
-        (1, 1, 3, 'entrance-hall', 20, 1, '{}'),
-        (1, 1, 4, 'entrance-hall', 20, 1, '{}');
-COMMIT;
-
-BEGIN;
-INSERT INTO game_items (item_id, game_id, room_id)
-VALUES  (1, 1, 2),
-        (2, 1, 2),
-        (3, 1, 2);
-COMMIT;
-
-BEGIN;
-INSERT INTO game_npcs (npc_id, game_id, room_id, dialogue_exhausted, alive_or_dead)
-VALUES  (1, 1, 2, false, true),
-        (2, 1, 2, false, true);
+INSERT INTO npcs (name, description, dialogue, actions, hp, room_id)
+VALUES ('Dr.Chem', 'I am a Chemistry doctor', 'Hello, am doctor, dont stab with high heel pls', '{'attack'}', 55, 2)
+       ('Security Sentry', 'Wears rabbit hat', '!BANG!BANG!', '{'attack'}', 100, 2);
 COMMIT;
 
