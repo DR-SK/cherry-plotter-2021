@@ -22,4 +22,3 @@ VALUES ('Dr.Chem', 'I am a Chemistry doctor', 'Hello, am doctor, dont stab with 
        ('Security Sentry', 'Wears rabbit hat', '!BANG!BANG!', '{'attack'}', 100, 2);
 COMMIT;
 
-
