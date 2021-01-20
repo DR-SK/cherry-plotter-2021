@@ -10,6 +10,7 @@ VALUES ('null' , 'you broke a chair', 2);
 COMMIT;
 
 BEGIN;
+-- add effects to items table
 INSERT INTO items (name, description, actions, room_id)
 VALUES  ('first-aid', 'You notice a first-aid package sitting on one of the tables in front of you', '{'hold', 'use'}', 2),
         ('grenade', 'You notice a crate of grenades to your left', '{'hold', 'use'}', 2),

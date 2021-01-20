@@ -77,7 +77,8 @@ CREATE TABLE game_items (
     item_id BIGINT REFERENCES items(item_id),
     game_id BIGINT REFERENCES game_instances(game_id),
     room_id BIGINT REFERENCES rooms(room_id),
-    actions TEXT ARRAY
+    actions TEXT ARRAY,
+    effect TEXT
 );
 
 CREATE TABLE game_npcs (
