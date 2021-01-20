@@ -38,7 +38,7 @@ CREATE TABLE items (
     name TEXT NOT NULL,
     description TEXT NOT NULL,
     actions TEXT[],
-    --  ADD: effect of action
+    effect TEXT NOT NULL,
     room_id BIGINT REFERENCES rooms(room_id)
 );
 
