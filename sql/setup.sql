@@ -87,6 +87,8 @@ CREATE TABLE game_npcs (
     npc_id BIGINT REFERENCES npcs(npc_id),
     game_id BIGINT REFERENCES game_instances(game_id),
     room_id BIGINT REFERENCES rooms(room_id),
+    dialogue TEXT,
     dialogue_exhausted BOOLEAN NOT NULL,
+    actions TEXT[],
     alive BOOLEAN NOT NULL
 );

@@ -10,7 +10,8 @@
     "test": "jest --verbose --runInBand --testLocationInResults --setupFiles dotenv/config",
     "test:watch": "npm run test -- --watch",
     "start": "node -r dotenv/config server.js",
-    "start:watch": "nodemon -r dotenv/config server.js"
+    "start:watch": "nodemon -r dotenv/config server.js",
+    "setup-db": "cat sql/setup.sql | heroku pg:psql && cat sql/seed.sql | heroku pg:psql"
   },
   "jest": {
     "testEnvironment": "node"
