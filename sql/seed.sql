@@ -2,10 +2,8 @@
 BEGIN;
 -- create one user
 INSERT INTO users (username, password_hash)
-VALUES ('username', 'password');
+VALUES  ('username', 'password');
 COMMIT;
-
-
 
 BEGIN;
 INSERT INTO rooms (name, description, north, east, south, west)
@@ -15,7 +13,7 @@ COMMIT;
 
 BEGIN;
 INSERT INTO events (event_name, description, room_id)
-VALUES ('null' , 'you broke a chair', 2);
+VALUES  ('null' , 'you broke a chair', 2);
 COMMIT;
 
 BEGIN;
@@ -27,9 +25,9 @@ COMMIT;
 
 BEGIN;
 
-INSERT INTO npcs (name, description, dialogue, actions, hp, room_id, base_hack)
-VALUES ('Dr.Chem', 'I am a Chemistry doctor', 'Hello, am doctor, dont stab with high heel pls', '{attack}', 55, 2),
-       ('Security Sentry', 'Wears rabbit hat', '!BANG!BANG!', '{attack}', 100, 2), 1;
+INSERT INTO npcs (name, description, dialogue, actions, hp, base_hack, room_id)
+VALUES ('Dr.Chem', 'I am a Chemistry doctor', 'Hello, am doctor, dont stab with high heel pls', '{attack}', 15, 5, 1),
+       ('Security Sentry', 'Wears rabbit hat', '!BANG!BANG!', '{attack}', 100, 5, 1);
 
 COMMIT;
 
