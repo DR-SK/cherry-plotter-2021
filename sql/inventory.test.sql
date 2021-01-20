@@ -24,8 +24,8 @@ COMMIT;
 
 BEGIN;
 -- create a new game user
-INSERT INTO game_users (game_id, game_user_id, socket_uuid, current_location, hp, base_atk, inventory)
-VALUES  (1, 1, 1, 'entrance-hall', 20, 3, '{}');
+INSERT INTO game_users (game_id, game_user_id, socket_uuid, current_location, hp, base_atk, inventory, base_hack)
+VALUES  (1, 1, 1, 'entrance-hall', 20, 3, '{}', 2);
 COMMIT;
 
 BEGIN;

@@ -49,6 +49,7 @@ CREATE TABLE npcs (
     dialogue TEXT NOT NULL,
     actions TEXT[] NOT NULL,
     hp INTEGER NOT NULL,
+    base_hack INTEGER NOT NULL,
     room_id BIGINT REFERENCES rooms(room_id)
 );
 
@@ -64,7 +65,8 @@ CREATE TABLE game_users (
     current_location TEXT NOT NULL,
     hp INTEGER NOT NULL,
     base_atk INTEGER NOT NULL,
-    inventory TEXT[]
+    inventory TEXT[],
+    base_hack INTEGER NOT NULL
 );
 
 CREATE TABLE game_events (
