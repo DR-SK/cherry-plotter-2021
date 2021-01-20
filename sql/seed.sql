@@ -5,7 +5,7 @@ INSERT INTO users (username, password_hash)
 VALUES ('username', 'password');
 COMMIT;
 
-----------------
+
 
 BEGIN;
 INSERT INTO rooms (name, description, north, east, south, west)
@@ -26,8 +26,16 @@ VALUES  ('first-aid', 'You notice a first-aid package sitting on one of the tabl
 COMMIT;
 
 BEGIN;
+<<<<<<< HEAD
 INSERT INTO npcs (name, description, dialogue, actions, hp, room_id, base_hack)
 VALUES ('Dr.Chem', 'I am a Chemistry doctor', 'Hello, am doctor, dont stab with high heel pls', '{attack}', 55, 2),
        ('Security Sentry', 'Wears rabbit hat', '!BANG!BANG!', '{attack}', 100, 2), 1;
+=======
+
+INSERT INTO npcs (name, description, dialogue, actions, hp, room_id, base_hack)
+VALUES ('Dr.Chem', 'I am a Chemistry doctor', 'Hello, am doctor, dont stab with high heel pls', '{attack}', 55, 2),
+       ('Security Sentry', 'Wears rabbit hat', '!BANG!BANG!', '{attack}', 100, 2), 1;
+
+>>>>>>> 458cd7725e20ffac05e3c920ace6632e8c27ed2e
 COMMIT;
 
