@@ -12,8 +12,8 @@ COMMIT;
 
 BEGIN;
 -- create one item
-INSERT INTO items (name, description, actions, room_id)
-VALUES  ('key', 'a key', '{hold, use}', 1);
+INSERT INTO items (name, description, actions, effect, room_id)
+VALUES  ('key', 'a key', '{hold, use}', 'side-effect', 1);
 COMMIT;
 
 BEGIN;
@@ -30,6 +30,6 @@ COMMIT;
 
 BEGIN;
 -- create one game item
-INSERT INTO game_items (item_id, game_id, room_id)
-VALUES  (1, 1, 1);
+INSERT INTO game_items (item_id, game_id, room_id, actions, effect)
+VALUES  (1, 1, 1, '{}', '');
 COMMIT;

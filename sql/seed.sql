@@ -10,6 +10,7 @@ VALUES ('null' , 'you broke a chair', 2);
 COMMIT;
 
 BEGIN;
+-- add effects to items table
 INSERT INTO items (name, description, actions, room_id)
 VALUES  ('first-aid', 'You notice a first-aid package sitting on one of the tables in front of you', '{'hold', 'use'}', 2),
         ('grenade', 'You notice a crate of grenades to your left', '{'hold', 'use'}', 2),
@@ -18,7 +19,7 @@ COMMIT;
 
 BEGIN;
 INSERT INTO npcs (name, description, dialogue, actions, hp, room_id)
-VALUES ('Dr.Chem', 'I am a Chemistry doctor', 'Hello, am doctor, dont stab with high heel pls', '{'attack'}', 55, 2)
-       ('Security Sentry', 'Wears rabbit hat', '!BANG!BANG!', '{'attack'}', 100, 2);
+VALUES ('Dr.Chem', 'I am a Chemistry doctor', 'Hello, am doctor, dont stab with high heel pls', '{attack}', 55, 2),
+       ('Security Sentry', 'Wears rabbit hat', '!BANG!BANG!', '{attack}', 100, 2);
 COMMIT;
 

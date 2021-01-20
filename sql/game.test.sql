@@ -27,8 +27,8 @@ COMMIT;
 
 BEGIN;
 -- create one item
-INSERT INTO items (name, description, actions, room_id)
-VALUES  ('key', 'a key', '{hold, use}', 1);
+INSERT INTO items (name, description, actions, effect, room_id)
+VALUES  ('key', 'a key', '{hold, use}', 'side-effect', 1);
         -- ('dagger', 'a dagger', '{hold, stab}', 2);
 COMMIT;
 
