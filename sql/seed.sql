@@ -20,9 +20,9 @@ COMMIT;
 
 BEGIN;
 INSERT INTO items (name, description, actions, effect, room_id)
-VALUES  ('first-aid', 'You notice a first-aid package sitting on one of the tables in front of you', '{hold, use}', 'side-effect', 1),
-        ('grenade', 'You notice a crate of grenades to your left', '{hold, use}', 'side-effect', 1),
-        ('cash', 'In the back corner on a table you notice wads of cash', '{pick up, use}', 'side-effect', 1);
+VALUES  ('first-aid', 'You notice a first-aid package sitting on one of the tables in front of you', '{hold, use, investigate}', 'side-effect', 1),
+        ('grenade', 'You notice a crate of grenades to your left', '{hold, use, investigate}', 'side-effect', 1),
+        ('cash', 'In the back corner on a table you notice wads of cash', '{pick up, use, investigate}', 'side-effect', 1);
 COMMIT;
 
 BEGIN;
