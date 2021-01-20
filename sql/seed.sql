@@ -28,8 +28,8 @@ COMMIT;
 BEGIN;
 
 INSERT INTO npcs (name, description, dialogue, actions, hp, room_id, base_hack)
-VALUES ('Dr.Chem', 'I am a Chemistry doctor', 'Hello, am doctor, dont stab with high heel pls', '{attack}', 55, 2),
-       ('Security Sentry', 'Wears rabbit hat', '!BANG!BANG!', '{attack}', 100, 2), 1;
+VALUES ('Dr.Chem', 'I am a Chemistry doctor', 'Hello, am doctor, dont stab with high heel pls', '{attack}', 55, 1, 1),
+       ('Security Sentry', 'Wears rabbit hat', '!BANG!BANG!', '{attack}', 100, 1, 1);
 
 COMMIT;
 
