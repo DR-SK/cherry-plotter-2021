@@ -1,5 +1,9 @@
 const fs = require("fs");
+<<<<<<< Updated upstream
 const pool = require("../lib/connection/pool");
+=======
+const pool = require("../lib/utils/pool");
+>>>>>>> Stashed changes
 const request = require("supertest");
 const app = require("../lib/app");
 
@@ -9,27 +13,12 @@ describe("test inventory routes", () => {
     await pool.query(fs.readFileSync("./sql/inventory.test.sql", "utf-8"));
   });
 
-  let agent, user;
-
-  beforeEach(async () => {
-    agent = request.agent(app);
-
-    user = await agent.post("/api/v1/auth/signup").send({
-      username: "username",
-      password: "password",
-    });
-  });
-
   afterAll(() => {
     return pool.query.end();
   });
 
-  it.only("allows a user to add an item to their inventory", async () => {
-    const res = await agent.post("/inventory").send({
-      gameId: 2,
-      userId: 2,
-      itemName: "key",
-    });
+  it("allows a user to add an item to their inventory", async () => {
+    const { rows } = await pool.query("SELECT * FROM game_users");
 
     console.log(res.body);
 
