@@ -38,7 +38,7 @@ describe("test inventory routes", () => {
     })
   });
 
-  it.only("allows a user to view their inventory via GET", async () => {
+  it("allows a user to view their inventory via GET", async () => {
     return agent 
     .post('/inventory/view')
     .send({
@@ -50,13 +50,15 @@ describe("test inventory routes", () => {
     })
   });
 
-  it("allows a user to remove an item from their inventory", async () => {
-    const { rows } = await pool.query("SELECT * FROM game_users");
-
-    const res = await request(app).get(
-      `/inventory/remove/${rows[0].game_id}/${rows[0].game_user_id}/key`
-    );
-
-    expect(res.body).toEqual({ inventory: [] });
+  it.only("allows a user to remove an item from their inventory", async () => {
+    return agent 
+    .delete('/inventory')
+    .send({
+      gameId: 1,
+      userId: user.userId
+    })
+    .then(res => {
+      expect(res.body).toEqual({inventory: []})
+    })
   });
 });
