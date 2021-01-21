@@ -2,11 +2,20 @@ const fs = require("fs");
 const pool = require("../lib/connection/pool");
 const request = require("supertest");
 const app = require("../lib/app");
+const UserService = require("../lib/services/UserService");
 
-describe.only("test inventory routes", () => {
+describe("test game routes", () => {
+  let user;
+  let agent = request.agent(app);
+
   beforeEach(async () => {
     await pool.query(fs.readFileSync("./sql/setup.sql", "utf-8"));
-    await pool.query(fs.readFileSync("./sql/game.test.sql", "utf-8"));
+    await pool.query(fs.readFileSync("./sql/seed.sql", "utf-8"));
+    user = await UserService.create({username:'username', password: 'password'});
+    
+   await agent 
+  .post('/api/v1/auth/login')
+  .send({username:'username', password: 'password'});
   });
 
   afterAll(() => {
@@ -14,27 +23,14 @@ describe.only("test inventory routes", () => {
   });
 
   it("allows a user to create a new game", async () => {
-    const { rows } = await pool.query("SELECT * FROM users");
-
-    const res = await request(app).get(`/games/new/${rows[0].user_id}`);
-
-    expect(res.body).toEqual({ game_id: "1" });
-  });
-
-  it("allows a user to join an existing game", async () => {
-    const { rows: user } = await pool.query("SELECT * FROM users");
-
-    console.log(user[0].user_id);
-
-    const req = await request(app).get(`/games/new/${user[0].user_id}`);
-
-    console.log(req.body);
-    const { rows: game } = await pool.query("SELECT * FROM game_users");
-
-    const res = await request(app).get(
-      `/games/join/${game[0].game_id}/${game[0].game_user_id}`
-    );
-
-    expect(res.body).toEqual({ game_id: "1" });
+    return agent 
+    .get('/games/new/')
+    .send({
+      userId: user.userId
+    })
+    
+    .then(res => {
+      expect(res.body).toEqual({game_id: '1', room_id: '1'})
+    })
   });
 });
