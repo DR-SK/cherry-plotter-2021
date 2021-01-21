@@ -40,7 +40,7 @@ describe("test auth routes", () => {
       .send({ username: "user@test.com", password: "password" });
 
     expect(res.body).toEqual({
-      userId: user.userId,
+      userId: expect.any(String),
       username: "user@test.com",
     });
   });
