@@ -55,7 +55,8 @@ CREATE TABLE npcs (
 
 CREATE TABLE game_instances (
     game_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    game_completed BOOLEAN NOT NULL
+    game_completed BOOLEAN NOT NULL,
+    game_over BOOLEAN NOT NULL
 );
 
 CREATE TABLE game_users (
