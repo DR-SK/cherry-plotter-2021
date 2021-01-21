@@ -1,8 +1,8 @@
 
-BEGIN;
-INSERT INTO users (username, password_hash)
-VALUES  ('username', 'password');
-COMMIT;
+-- BEGIN;
+-- INSERT INTO users (username, password_hash)
+-- VALUES  ('username', 'password');
+-- COMMIT;
 
 BEGIN;
 INSERT INTO rooms (name, description, north, east, south, west)
