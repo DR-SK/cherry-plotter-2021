@@ -25,13 +25,13 @@ describe("test inventory routes", () => {
     return pool.query.end();
   });
 
-  it("allows a user to add an item to their inventory", async () => {
+  it.only("allows a user to add an item to their inventory", async () => {
     return agent 
     .post('/inventory')
     .send({
       gameId: 1,
       userId: user.userId,
-      itemName: 'key'
+      itemName: "key"
     })
     .then(res => {
       expect(res.body).toEqual({inventory: ["key"]})
@@ -50,7 +50,7 @@ describe("test inventory routes", () => {
     })
   });
 
-  it.only("allows a user to remove an item from their inventory", async () => {
+  it("allows a user to remove an item from their inventory", async () => {
     return agent 
     .delete('/inventory')
     .send({
