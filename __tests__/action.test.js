@@ -38,7 +38,7 @@ describe.only("test actions test routes", () => {
   });
 
   it("shows a user a list of possible targets", async() => {
-      console.log(newGame.body);
+
     return agent
       .post("/actions/targets")
       .send({
@@ -49,6 +49,24 @@ describe.only("test actions test routes", () => {
       })
       .then(res => {
         expect(res.body).toEqual({ "inventory": [] });
+      });
+  });
+
+  it("shows a user a list of possible actions", async() => {
+
+    return agent
+      .post("/actions/perform")
+      .send({
+        action: "investigate", 
+        target: "grenade",
+        gameId: newGame.body.game_id,
+        userId: user.userId,
+   
+
+      })
+      .then(res => {    
+        console.log(res.body, "last test");
+        expect(res.body).toEqual();
       });
   });
 
