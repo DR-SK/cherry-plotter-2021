@@ -25,7 +25,7 @@ describe("test inventory routes", () => {
     return pool.query.end();
   });
 
-  it.only("allows a user to add an item to their inventory", async () => {
+  it("allows a user to add an item to their inventory", async () => {
     return agent 
     .post('/inventory')
     .send({
