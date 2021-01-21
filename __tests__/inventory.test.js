@@ -1,5 +1,5 @@
 const fs = require("fs");
-const pool = require("../lib/utils/pool");
+const pool = require("../lib/connection/pool");
 const request = require("supertest");
 const app = require("../lib/app");
 
@@ -39,13 +39,11 @@ describe("test inventory routes", () => {
   it("allows a user to view their inventory via GET", async () => {
     const { rows } = await pool.query("SELECT * FROM game_users");
 
-    await request(app).get(
-      `/inventory/add/${rows[0].game_id}/${rows[0].game_user_id}/key`
-    );
+    await request(app).post(`/inventory/${rows[0].game_id}/key`);
 
-    const res = await request(app).get(
-      `/inventory/view/${rows[0].game_id}/${rows[0].game_user_id}`
-    );
+    const res = await request(app).post(`/inventory/${rows[0].game_id}`).send({
+      userId: "2",
+    });
 
     expect(res.body).toEqual({ inventory: ["key"] });
   });
@@ -53,8 +51,8 @@ describe("test inventory routes", () => {
   it("allows a user to remove an item from their inventory", async () => {
     const { rows } = await pool.query("SELECT * FROM game_users");
 
-    const res = await request(app).get(
-      `/inventory/remove/${rows[0].game_id}/${rows[0].game_user_id}/key`
+    const res = await request(app).delete(
+      `/inventory/${rows[0].game_id}/${rows[0].game_user_id}/key`
     );
 
     expect(res.body).toEqual({ inventory: [] });
