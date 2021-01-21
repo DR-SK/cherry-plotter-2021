@@ -7,6 +7,7 @@ const UserService = require("../lib/services/UserService");
 describe.only("test actions test routes", () => {
   let user;
   const agent = request.agent(app);
+  let newGame;
 
   beforeEach(async() => {
     await pool.query(fs.readFileSync("./sql/setup.sql", "utf-8"));
@@ -17,7 +18,7 @@ describe.only("test actions test routes", () => {
       .post("/api/v1/auth/login")
       .send({ username:"username", password: "password" });
       
-    await agent 
+    newGame = await agent 
       .get("/games/new/");
   });
 
@@ -25,7 +26,7 @@ describe.only("test actions test routes", () => {
     return pool.query.end();
   });
 
-  it("allows a user to create a new game", async() => {
+  it("shows a user a list of possible actions", async() => {
     return agent
       .post("/actions/list")
       .send({
@@ -35,4 +36,20 @@ describe.only("test actions test routes", () => {
         expect(res.body).toEqual(["inventory", "attack", "hack", "investigate", "pick up", "use"]);
       });
   });
+
+  it("shows a user a list of possible targets", async() => {
+      console.log(newGame.body);
+    return agent
+      .post("/actions/targets")
+      .send({
+        action: "inventory",
+        gameId: newGame.body.game_id,
+        roomId: newGame.body.room_id,
+
+      })
+      .then(res => {
+        expect(res.body).toEqual({ "inventory": [] });
+      });
+  });
+
 });
