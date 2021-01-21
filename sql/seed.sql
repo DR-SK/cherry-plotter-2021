@@ -17,16 +17,15 @@ COMMIT;
 
 BEGIN;
 INSERT INTO items (name, description, actions, effect, room_id)
-VALUES  ('first-aid', 'You notice a first-aid package sitting on one of the tables in front of you', '{hold, use, investigate}', 'side-effect', 1),
-        ('grenade', 'You notice a crate of grenades to your left', '{hold, use, investigate}', 'side-effect', 1),
-        ('cash', 'In the back corner on a table you notice wads of cash', '{pick up, use, investigate}', 'side-effect', 1);
+VALUES  ('first-aid', 'You notice a first-aid package sitting on one of the tables in front of you', '{pick up, use, investigate}', 'side-effect', 1),
+        ('grenade', 'You notice a crate of grenades to your left', '{pick up, use, investigate}', 'side-effect', 1),
+        ('cash', 'In the back corner on a table you notice wads of cash', '{pick up, investigate}', 'side-effect', 1);
 COMMIT;
 
 BEGIN;
 
-INSERT INTO npcs (name, description, dialogue, actions, hp, base_hack, room_id)
-VALUES ('Dr. Chem', 'I am a Chemistry doctor', 'Hello, am doctor, dont stab with high heel pls', '{attack, hack}', 15, 5, 1),
-       ('Security Sentry', 'Wears rabbit hat', '!BANG!BANG!', '{attack, hack}', 100, 5, 1);
-
+INSERT INTO npcs (name, description, dialogue, actions, base_atk, base_hack, room_id)
+VALUES ('Dr. Chem', 'I am a Chemistry doctor', 'Hello, am doctor, dont stab with high heel pls', '{attack, hack, investigate}', 5, 20, 1),
+       ('Security Sentry', 'Wears rabbit hat', '!BANG!BANG!', '{attack, hack, investigate}', 5, 10, 1);
 COMMIT;
 

@@ -48,14 +48,15 @@ CREATE TABLE npcs (
     description TEXT NOT NULL,
     dialogue TEXT NOT NULL,
     actions TEXT[] NOT NULL,
-    hp INTEGER NOT NULL,
+    base_atk INTEGER NOT NULL,
     base_hack INTEGER NOT NULL,
     room_id BIGINT REFERENCES rooms(room_id)
 );
 
 CREATE TABLE game_instances (
     game_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    game_completed BOOLEAN NOT NULL
+    game_completed BOOLEAN NOT NULL,
+    game_over BOOLEAN NOT NULL
 );
 
 CREATE TABLE game_users (
@@ -87,6 +88,7 @@ CREATE TABLE game_npcs (
     npc_id BIGINT REFERENCES npcs(npc_id),
     game_id BIGINT REFERENCES game_instances(game_id),
     room_id BIGINT REFERENCES rooms(room_id),
+    hp INTEGER NOT NULL,
     dialogue TEXT,
     dialogue_exhausted BOOLEAN NOT NULL,
     actions TEXT[],
