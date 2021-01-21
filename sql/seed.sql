@@ -1,6 +1,5 @@
 
 BEGIN;
--- create one user
 INSERT INTO users (username, password_hash)
 VALUES  ('username', 'password');
 COMMIT;
@@ -26,8 +25,8 @@ COMMIT;
 BEGIN;
 
 INSERT INTO npcs (name, description, dialogue, actions, hp, base_hack, room_id)
-VALUES ('Dr.Chem', 'I am a Chemistry doctor', 'Hello, am doctor, dont stab with high heel pls', '{attack}', 15, 5, 1),
-       ('Security Sentry', 'Wears rabbit hat', '!BANG!BANG!', '{attack}', 100, 5, 1);
+VALUES ('Dr. Chem', 'I am a Chemistry doctor', 'Hello, am doctor, dont stab with high heel pls', '{attack, hack}', 15, 5, 1),
+       ('Security Sentry', 'Wears rabbit hat', '!BANG!BANG!', '{attack, hack}', 100, 5, 1);
 
 COMMIT;
 
