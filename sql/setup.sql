@@ -48,6 +48,7 @@ CREATE TABLE npcs (
     description TEXT NOT NULL,
     dialogue TEXT NOT NULL,
     actions TEXT[] NOT NULL,
+    base_atk INTEGER NOT NULL,
     base_hack INTEGER NOT NULL,
     room_id BIGINT REFERENCES rooms(room_id)
 );
