@@ -89,4 +89,20 @@ describe.only("test actions test routes", () => {
         });
       });
   });
+
+  it("executes an action (movement) on a given target", async () => {
+    return agent
+      .post("/actions/perform")
+      .send({
+        action: "movement",
+        target: "room-1",
+        gameId: newGame.body.game_id,
+        userId: user.userId,
+      })
+      .then((res) => {
+        expect(res.body).toEqual({
+          current_location: "room-1",
+        });
+      });
+  });
 });
