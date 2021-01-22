@@ -29,7 +29,7 @@ describe.only("test actions test routes", () => {
     return pool.query.end();
   });
 
-  it("shows a user a list of possible actions", async () => {
+  it("shows the user a list of possible actions", async () => {
     return agent
       .post("/actions/list")
       .send({
@@ -47,7 +47,7 @@ describe.only("test actions test routes", () => {
       });
   });
 
-  it("shows a user a list of possible targets", async () => {
+  it("shows the user a list of possible targets", async () => {
     return agent
       .post("/actions/targets")
       .send({
@@ -60,7 +60,7 @@ describe.only("test actions test routes", () => {
       });
   });
 
-  it("shows a user a list of possible actions", async () => {
+  it("executes an action (pick up) on a given target", async () => {
     return agent
       .post("/actions/perform")
       .send({
@@ -71,6 +71,22 @@ describe.only("test actions test routes", () => {
       })
       .then((res) => {
         expect(res.body.item).toEqual("grenade added to inventory");
+      });
+  });
+
+  it("executes an action (investigate) on a given target", async () => {
+    return agent
+      .post("/actions/perform")
+      .send({
+        action: "investigate",
+        target: "grenade",
+        gameId: newGame.body.game_id,
+        userId: user.userId,
+      })
+      .then((res) => {
+        expect(res.body).toEqual({
+          description: "You notice a crate of grenades to your left",
+        });
       });
   });
 });
