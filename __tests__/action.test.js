@@ -105,4 +105,18 @@ describe.only("test actions test routes", () => {
         });
       });
   });
+
+  it("executes an action (attack) on a given target", async () => {
+    return agent
+      .post("/actions/perform")
+      .send({
+        action: "attack",
+        target: "Dr. Chem",
+        gameId: newGame.body.game_id,
+        userId: user.userId,
+      })
+      .then((res) => {
+        expect(res.body).toEqual({ npc_hp: expect.anything() });
+      });
+  });
 });
