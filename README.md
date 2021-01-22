@@ -2,7 +2,7 @@
 
 ## Description
 
-A backend game engine built in Node.js.
+A backend game engine built in Node.js. Deployed to [Heroku](https://desolate-coast-32054.herokuapp.com/).
 
 --- 
 
