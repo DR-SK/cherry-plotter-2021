@@ -14,7 +14,8 @@
     "setup-db": "cat sql/setup.sql | heroku pg:psql && cat sql/seed.sql | heroku pg:psql"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": ["jest-extended"]
   },
   "keywords": [],
   "author": "",
@@ -35,6 +36,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jest-extended": "^0.11.5",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.20",
     "pg": "^8.5.1",
