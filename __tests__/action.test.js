@@ -119,4 +119,22 @@ describe.only("test actions test routes", () => {
         expect(res.body).toEqual({ npc_hp: expect.anything() });
       });
   });
+
+  it("executes an action (hack) on a given target", async () => {
+    return agent
+      .post("/actions/perform")
+      .send({
+        action: "hack",
+        target: "Dr. Chem",
+        gameId: newGame.body.game_id,
+        userId: user.userId,
+      })
+      .then((res) => {
+        expect(res.body).toEqual(
+          expect.objectContaining(
+            { player_hp: expect.anything() } || { npc_alive: false }
+          )
+        );
+      });
+  });
 });
