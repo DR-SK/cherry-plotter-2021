@@ -13,11 +13,13 @@
 * room_id is hard-coded
 * *calling viewInventory from createActionTargets requires the userId to be 1*
 * the player's HP is only checked within the attack block: this is logic the front-end will need to check for to determine an end game condition
-*
 
 #### performAction
 
 * room_id is hard-coded
+* using an item assumes that it is discarded
+* a successful attack or hack against an npc assumes that it is deactivated/killed
+* you can add the same item to your inventory multiple times if you hit the same route multiple times; front-end logic could help prevent this, otherwise the query should be updated to remove this action
 
 ---
 ### Inventory.js
