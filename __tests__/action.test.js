@@ -69,6 +69,8 @@ describe.only("test actions test routes", () => {
         gameId: newGame.body.game_id,
         userId: user.userId,
       })
-      .then((res) => expect(res.body).toEqual(expect.anything()));
+      .then((res) => {
+        expect(res.body.item).toEqual("grenade added to inventory");
+      });
   });
 });
